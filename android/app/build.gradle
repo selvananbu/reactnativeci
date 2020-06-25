@@ -132,8 +132,8 @@ android {
         applicationId "com.reactnativeci"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
     }
     splits {
         abi {
@@ -182,6 +182,11 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+            output.outputFileName = output.outputFileName
+                    .replace("app-", "reactnativeci-")
+                    .replace("unsigned", "")
+                    .replace(".apk", "${variant.versionName}.apk")
+
 
         }
     }
